@@ -41,3 +41,62 @@ This project is a simple, console-based Library Management System built in Java.
               Run the LibraryTest.java file.
               
               Observe the console output to see the system's features in action.
+
+
+
+
+
+-------------------------**-CLass Diagram-**---------------------------------------------------
+
++-------------------+
+|       Book        |
++-------------------+
+| - isbn: String    |
+| - title: String   |
+| - author: String  |
+| - status: BookStatus |
+| - reservedBy: List<Patron> |
++-------------------+
+
+
++-------------------+
+|      Patron       |
++-------------------+
+| - patronId: String|
+| - name: String    |
+| - contactInfo: String |
+| - borrowedBooks: List<Book> |
++-------------------+
+
+
++-------------------+
+|      Library      |
++-------------------+
+| - books: Map<String, Book>   |
+| - patrons: Map<String, Patron> |
+| - notifier: Notifier          |
++-------------------+
+
+
++-------------------+
+|   BookStatus (enum) |
++-------------------+
+
+
++-------------------+
+|   Notifier (interface) |
++-------------------+
+        ^
+        |
++-------------------+
+|   EmailNotifier   |
++-------------------+
+
+
+----------------------------------------------------------------------------------------------------------
+
+<img width="1119" height="174" alt="image" src="https://github.com/user-attachments/assets/3ed02a73-4c9a-4969-85bf-c925e0ae32c2" />
+
+
+
+
