@@ -44,60 +44,163 @@ Bottom-Top Approach
               
               Observe the console output to see the system's features in action.
 
-
-
+--------------------------------------------------------------------------------------------
 
 
 -------------------------**-CLass Diagram-**---------------------------------------------------
 
-+-------------------+
-|       Book        |
-+-------------------+
-| - isbn: String    |
-| - title: String   |
-| - author: String  |
++----------------+
+|     Book       |
++----------------+
+| - isbn: String |
+| - title: String|
+| - author: String|
+| - publicationYear: int |
 | - status: BookStatus |
 | - reservedBy: List<Patron> |
-+-------------------+
++----------------+
+| + getIsbn()    |
+| + getTitle()   |
+| + getAuthor()  |
+| + getPublicationYear() |
+| + getStatus()  |
+| + getReservedBy() |
++----------------+
 
-
-+-------------------+
-|      Patron       |
-+-------------------+
-| - patronId: String|
-| - name: String    |
++------------------+
+|    Patron        |
++------------------+
+| - id: String     |
+| - name: String   |
 | - contactInfo: String |
 | - borrowedBooks: List<Book> |
-+-------------------+
++------------------+
+| + borrowBook()   |
+| + returnBook()   |
+| + getHistory()   |
++------------------+
+
++------------------+
+|    Library       |
++------------------+
+| - books: List<Book> |
+| - patrons: List<Patron> |
+| - notifier: Notifier |
++------------------+
+| + addBook()      |
+| + removeBook()   |
+| + updateBook()   |
+| + searchBook()   |
+| + registerPatron()|
+| + checkoutBook() |
+| + returnBook()   |
++------------------+
+
++------------------+
+|   <<interface>>  |
+|    Notifier      |
++------------------+
+| + sendNotification(Patron, String) |
++------------------+
+
++------------------+
+|  EmailNotifier   |
++------------------+
+| + sendNotification(Patron, String) |
++------------------+
+
++------------------+
+|   BookStatus     |
++------------------+
+| AVAILABLE        |
+| CHECKED_OUT      |
+| RESERVED         |
++------------------+
 
 
-+-------------------+
-|      Library      |
-+-------------------+
-| - books: Map<String, Book>   |
-| - patrons: Map<String, Patron> |
-| - notifier: Notifier          |
-+-------------------+
+**Relationships:**
 
+Library → Book (manages many books)
 
-+-------------------+
-|   BookStatus (enum) |
-+-------------------+
+Library → Patron (manages many patrons)
 
+Library → Notifier (uses interface for notifications)
 
-+-------------------+
-|   Notifier (interface) |
-+-------------------+
-        ^
-        |
-+-------------------+
-|   EmailNotifier   |
-+-------------------+
+EmailNotifier → Notifier (implements interface)
+
+Book → Patron (reservedBy list)
+
+Patron → Book (borrowedBooks list)
 
 
 ----------------------------------------------------------------------------------------------------------
+```mermaid
+classDiagram
+    class Book {
+        - String isbn
+        - String title
+        - String author
+        - int publicationYear
+        - BookStatus status
+        - List~Patron~ reservedBy
+        + getIsbn()
+        + getTitle()
+        + getAuthor()
+        + getPublicationYear()
+        + getStatus()
+        + getReservedBy()
+    }
 
-<img width="1119" height="174" alt="image" src="https://github.com/user-attachments/assets/3ed02a73-4c9a-4969-85bf-c925e0ae32c2" />
+    class Patron {
+        - String id
+        - String name
+        - String contactInfo
+        - List~Book~ borrowedBooks
+        + borrowBook()
+        + returnBook()
+        + getHistory()
+    }
+
+    class Library {
+        - List~Book~ books
+        - List~Patron~ patrons
+        - Notifier notifier
+        + addBook()
+        + removeBook()
+        + updateBook()
+        + searchBook()
+        + registerPatron()
+        + checkoutBook()
+        + returnBook()
+    }
+
+    class Notifier {
+        <<interface>>
+        + sendNotification(Patron, String)
+    }
+
+    class EmailNotifier {
+        + sendNotification(Patron, String)
+    }
+
+    class BookStatus {
+        <<enum>>
+        AVAILABLE
+        CHECKED_OUT
+        RESERVED
+    }
+
+    Library --> Book : manages
+    Library --> Patron : manages
+    Library --> Notifier : uses
+    EmailNotifier ..|> Notifier
+    Book --> Patron : reservedBy
+    Patron --> Book : borrowedBooks
+
+```mermaid
+
+--------------------------------------------------------------------------------------------
+
 
 
 
