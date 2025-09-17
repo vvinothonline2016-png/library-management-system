@@ -2,6 +2,8 @@
 
 This project is a simple, console-based Library Management System built in Java. It is designed to demonstrate core Object-Oriented Programming (OOP) principles, the use of Java Collections, and basic software design patterns.
 
+Bottom-Top Approach
+
 **Features**
 
 **Book Management**:        Add, remove, and search for books by title, author, or ISBN.
