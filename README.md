@@ -38,7 +38,7 @@ This project is a simple, console-based Library Management System built in Java.
 
               Compile all the Java files in the domain package.
               
-              Run the LibraryTest.java file.
+              Run the LibraryTestMain.java file.
               
               Observe the console output to see the system's features in action.
 
